@@ -14,10 +14,16 @@
   }
  
   function completeTask(list, id) {
-    var t = list.find(function (x) { return x.id === id; });
-    return updateTask(list, id, { status: t && t.status === "done" ? "todo" : "done" });
-  }
- 
+  var t = list.find(function (x) {
+    return x.id === id;
+  });
+
+  if (!t) return list;
+
+  return updateTask(list, id, {
+    status: t.status === "done" ? "todo" : "done"
+  });
+}
   function deleteTask(list, id) {
     return list.filter(function (t) { return t.id !== id; });
   }
